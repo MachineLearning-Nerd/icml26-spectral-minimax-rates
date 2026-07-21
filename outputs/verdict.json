@@ -1,0 +1,92 @@
+{
+  "c2_prop32_sandwich": {
+    "passed": true,
+    "per_K": {
+      "2": {
+        "esd": 2,
+        "Rstar": 4.0,
+        "lo": 1.0,
+        "hi": 4.0,
+        "ok": true
+      },
+      "4": {
+        "esd": 5,
+        "Rstar": 8.0,
+        "lo": 4.0,
+        "hi": 10.0,
+        "ok": true
+      },
+      "6": {
+        "esd": 6,
+        "Rstar": 12.0,
+        "lo": 5.0,
+        "hi": 12.0,
+        "ok": true
+      },
+      "8": {
+        "esd": 9,
+        "Rstar": 15.999999999999998,
+        "lo": 8.0,
+        "hi": 18.0,
+        "ok": true
+      }
+    }
+  },
+  "c1_thm33_minimax": {
+    "passed": true,
+    "per_K": {
+      "2": {
+        "esd": 2,
+        "Rstar": 4.0
+      },
+      "4": {
+        "esd": 5,
+        "Rstar": 8.0
+      },
+      "8": {
+        "esd": 9,
+        "Rstar": 15.999999999999998
+      }
+    }
+  },
+  "c3_thm43_scaling": {
+    "passed": true,
+    "ns": [
+      1,
+      4,
+      16
+    ],
+    "risks": [
+      5.0,
+      1.25,
+      0.3125
+    ],
+    "ratio": 16.0,
+    "note": "Thm 4.3 minimax risk Theta(K_n sigma^2/n); sparse-signal oracle-PC risk = K*sigma^2/n exactly (1/n scaling)."
+  },
+  "c5_linear_rate": {
+    "passed": true,
+    "observed": [
+      5.0,
+      1.25,
+      0.3125
+    ],
+    "predicted": [
+      5.0,
+      1.25,
+      0.3125
+    ],
+    "rel_err": 0.0
+  },
+  "c4_thm52_opgf": {
+    "passed": true,
+    "esd_before": 29,
+    "esd_after": 7,
+    "note": "OP-GF adapts the kernel spectrum to increase signal-kernel alignment, which lowers the ESD (Thm 5.2)."
+  },
+  "c6_span_profile": {
+    "passed": true,
+    "before": 0.8620689655172413,
+    "after": 0.0
+  }
+}
