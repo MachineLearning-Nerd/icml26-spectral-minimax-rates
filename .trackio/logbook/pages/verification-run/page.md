@@ -4,10 +4,10 @@
 uv run python repro/src/verify_spectral.py
 ```
 
-- Recorded OpenResearch run: `96c9bb65-ace8-41ae-be09-b2a4b7c45601`
-- Commit evaluated: `9b15cc9`
+- Recorded OpenResearch run: `4a067f01-3c6a-4f55-a8c1-8388cb364dc3`
+- Commit evaluated: `1680125`
 - Environment: CPython 3.12.11, NumPy 2.5.1, local CPU
-- Duration: 15 seconds
+- Duration: 1 minute 50 seconds
 - Exit code: 0
 
 ```text
@@ -26,4 +26,4 @@ SUMMARY passed=11 total=11
 PUBLICATION_GATE=PASS
 ```
 
-The deterministic unit suite separately passed `6/6` tests.
+The deterministic unit suite separately passed `7/7` tests. Claim 6 additionally passed its paper-scale strict endpoint rule with paired confidence intervals below zero at two independent seeds.

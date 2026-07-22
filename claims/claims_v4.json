@@ -53,7 +53,7 @@
       "anchor": "Figure 2",
       "statement": "ESD and oracle-PC error generally decrease; deeper factorizations start later and can finish lower.",
       "category": "empirical",
-      "method": "CPU Monte Carlo reproduction with disclosed clean-room optimizer settings"
+      "method": "paper-scale d=5000 paired CPU Monte Carlo reproduction at two independent seeds with disclosed clean-room optimizer settings"
     },
     {
       "id": "PB.2",

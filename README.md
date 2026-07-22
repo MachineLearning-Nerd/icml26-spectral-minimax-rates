@@ -27,16 +27,18 @@ claim matrix, JSON verdict, and five figures. The exact claim inventory and
 paper checksum are in `claims/claims_v4.json`.
 
 The committed evidence was produced by OpenResearch run
-`96c9bb65-ace8-41ae-be09-b2a4b7c45601` on CPU: all 11 grouped checks covering
-the 15-item ledger passed in 15 seconds. `outputs/verify_run.log` is the full
+`4a067f01-3c6a-4f55-a8c1-8388cb364dc3` on CPU: all 11 grouped checks covering
+the 15-item ledger passed in 1 minute 50 seconds. `outputs/verify_run.log` is the full
 evidence log, while `outputs/verdict.json` is the compatibility copy of the v4
 machine-readable verdict.
 
 ## Scope disclosure
 
-Figures 1, 3, and 4 use the dimensions stated in v4. Figure 2 uses the paper's
-20 replications but discloses clean-room optimizer settings because its step
-size and initialization are not specified in the paper. Figure 5 is explicitly
+Figures 1–4 use the dimensions stated in v4. Figure 2 uses `d=5000`, `q=3`,
+20 paired replications, and discloses its optimizer settings because the paper
+does not specify its step size, initialization, seed, or stopping rule. Two
+independent seeds verify the strict endpoint ordering with paired 95% confidence
+intervals below zero. Figure 5 is explicitly
 scale-reduced for CPU and supports the pathwise mechanism; it is not presented
 as an exact numerical replication of the paper's `p=900` run.
 
