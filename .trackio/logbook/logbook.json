@@ -1,41 +1,61 @@
 {
   "schema_version": 1,
-  "title": "Corrected v4 Repro - Alignment-Sensitive Minimax Rates",
+  "title": "Claim-by-Claim Reproduction - Alignment-Sensitive Minimax Rates",
   "emoji": "🎯",
   "space_id": "DineshAI/4HrWo5x7YF",
-  "paper": null,
+  "paper": {
+    "arxiv_id": "2509.20294"
+  },
   "tags": [
     "icml2026-repro",
     "paper-4HrWo5x7YF"
   ],
-  "updated_at": "2026-07-22T18:33:00+00:00",
+  "updated_at": "2026-07-22T18:44:28+00:00",
   "root": {
     "slug": "index",
-    "title": "Corrected v4 Repro - Alignment-Sensitive Minimax Rates",
+    "title": "Claim-by-Claim Reproduction - Alignment-Sensitive Minimax Rates",
     "file": "pages/index.md",
     "children": [
       {
-        "slug": "overview",
-        "title": "Overview",
-        "file": "pages/overview/page.md",
+        "slug": "executive-summary",
+        "title": "Executive summary",
+        "file": "pages/executive-summary/page.md",
         "children": []
       },
       {
-        "slug": "claims",
-        "title": "Claims",
-        "file": "pages/claims/page.md",
+        "slug": "claim-1-theorem-3-3-minimax-esd-rate",
+        "title": "Claim 1 - Theorem 3.3 minimax ESD rate",
+        "file": "pages/claim-1-theorem-3-3-minimax-esd-rate/page.md",
         "children": []
       },
       {
-        "slug": "evidence",
-        "title": "Evidence",
-        "file": "pages/evidence/page.md",
+        "slug": "claim-2-proposition-3-2-oracle-pc-sandwich",
+        "title": "Claim 2 - Proposition 3.2 oracle-PC sandwich",
+        "file": "pages/claim-2-proposition-3-2-oracle-pc-sandwich/page.md",
         "children": []
       },
       {
-        "slug": "verification-run",
-        "title": "Verification run",
-        "file": "pages/verification-run/page.md",
+        "slug": "claim-3-theorem-4-3-quota-rate",
+        "title": "Claim 3 - Theorem 4.3 quota rate",
+        "file": "pages/claim-3-theorem-4-3-quota-rate/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-4-theorem-5-2-op-gf-reduces-esd",
+        "title": "Claim 4 - Theorem 5.2 OP-GF reduces ESD",
+        "file": "pages/claim-4-theorem-5-2-op-gf-reduces-esd/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-5-linear-and-rkhs-extensions",
+        "title": "Claim 5 - Linear and RKHS extensions",
+        "file": "pages/claim-5-linear-and-rkhs-extensions/page.md",
+        "children": []
+      },
+      {
+        "slug": "claim-6-numerical-op-gf-and-depth",
+        "title": "Claim 6 - Numerical OP-GF and depth",
+        "file": "pages/claim-6-numerical-op-gf-and-depth/page.md",
         "children": []
       },
       {
@@ -46,6 +66,6 @@
       }
     ]
   },
-  "agent_view_tokens": 1736,
-  "revision": "20260722183300"
+  "agent_view_tokens": 5200,
+  "revision": "20260722184428"
 }
