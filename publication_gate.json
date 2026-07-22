@@ -1,8 +1,12 @@
 {
   "paper": "4HrWo5x7YF",
-  "tests_passed": true,
+  "arxiv": "2509.20294v4",
   "publication_gate_passed": true,
-  "claims_verified": 6,
-  "claims_total": 6,
-  "arxiv": "2509.20294"
+  "recorded_run": "96c9bb65-ace8-41ae-be09-b2a4b7c45601",
+  "commit": "9b15cc9",
+  "backend": "local-cpu",
+  "claim_ledger_items": 15,
+  "grouped_checks_passed": 11,
+  "grouped_checks_total": 11,
+  "reason": "The corrected v4 suite completed with PUBLICATION_GATE=PASS."
 }

@@ -1,56 +1,221 @@
-"""Clean-room implementation of the Effective Span Dimension (ESD) framework from
-"Alignment-Sensitive Minimax Rates for Spectral Algorithms" (arXiv 2509.20294). numpy, CPU.
+"""Numerical primitives for arXiv:2509.20294v4.
 
-Sequence model: z_j = theta*_j + xi_j,  xi_j mean 0 var sigma^2.
-ESD (Def 3.1): d†(sigma^2; theta*, lam) = min{k : (1/k) sum_{i>k} (theta*_{pi_i})^2 <= sigma^2},
-  pi orders indices by DECREASING lambda.
-Spectral estimators: theta_hat_j = (1 - psi_nu(lam_j)) z_j.
-  PC:  psi(lam) = 1{lam < nu}   -> keep lam>=nu, drop lam<nu.
-  GF:  psi(lam) = exp(-lam/nu)  -> shrink by exp(-lam/nu).
-Oracle PC risk (Prop 3.2): (d†-1) sigma^2 <= R*_PC <= 2 d† sigma^2.
+The functions in this module implement definitions and estimator risks directly.
+They deliberately separate theorem statements from empirical evidence: an
+experiment can validate identities, examples, and finite cases, but it cannot
+prove an asymptotic minimax lower bound.
 """
 from __future__ import annotations
+
+from dataclasses import dataclass
+from typing import Iterable
+
 import numpy as np
 
 
-def esd(theta, lam, sigma2):
-    """Effective Span Dimension: smallest k with tail-energy/k <= sigma^2 (ordering by decreasing lam)."""
-    order = np.argsort(-lam)                 # decreasing lambda
-    th = np.abs(theta[order]) ** 2
-    d = len(theta)
-    csum = np.concatenate([[0.0], np.cumsum(th)])      # csum[k] = sum of top-k
-    total = csum[-1]
-    for k in range(1, d + 1):
-        tail = total - csum[k]                         # sum_{i>k} theta_{pi_i}^2
-        if k * sigma2 >= tail - 1e-15:
-            return k
-    return d
+Array = np.ndarray
 
 
-def pc_risk(theta, lam, sigma2, nu):
-    """Risk of PC estimator with threshold nu: kept(lam>=nu) contribute sigma^2 var; dropped contribute bias theta^2."""
-    kept = lam >= nu
-    return float(sigma2 * kept.sum() + np.sum(theta[~kept] ** 2))
+def _vectors(theta: Array, lam: Array) -> tuple[Array, Array]:
+    theta = np.asarray(theta, dtype=float).reshape(-1)
+    lam = np.asarray(lam, dtype=float).reshape(-1)
+    if theta.size == 0 or theta.shape != lam.shape:
+        raise ValueError("theta and lam must be non-empty vectors of equal length")
+    if not np.all(np.isfinite(theta)) or not np.all(np.isfinite(lam)):
+        raise ValueError("theta and lam must be finite")
+    return theta, lam
 
 
-def oracle_pc_risk(theta, lam, sigma2):
-    """R*_PC = min over nu of pc_risk. (Optimal nu is one of the lambda values.)"""
-    best = float("inf")
-    for nu in np.unique(np.concatenate([lam, [lam.min() - 1, lam.max() + 1]])):
-        best = min(best, pc_risk(theta, lam, sigma2, nu))
-    return best
+def spectral_order(lam: Array) -> Array:
+    """Decreasing spectral order with deterministic index tie-breaking."""
+    lam = np.asarray(lam, dtype=float).reshape(-1)
+    return np.lexsort((np.arange(lam.size), -lam))
 
 
-def gf_filter(theta_obs, lam, nu):
-    """Gradient-flow spectral estimator: theta_hat_j = (1 - exp(-lam_j/nu)) z_j."""
-    return (1 - np.exp(-lam / nu)) * theta_obs
+def tail_energy(theta: Array, lam: Array) -> Array:
+    """Return tail energy after k leading coordinates for k=1,...,d."""
+    theta, lam = _vectors(theta, lam)
+    sq = theta[spectral_order(lam)] ** 2
+    suffix = np.cumsum(sq[::-1])[::-1]
+    return np.r_[suffix[1:], 0.0]
 
 
-def make_signal(d, K, sigma2, seed=0, tail_energy=None):
-    """Construct a signal with ESD exactly ~K: top-K entries large, tail summing to ~K*sigma^2."""
+def tradeoff(theta: Array, lam: Array) -> Array:
+    """H_{theta,lambda}(k) for k=1,...,d (Equation 9 in v4)."""
+    tails = tail_energy(theta, lam)
+    return tails / np.arange(1, tails.size + 1, dtype=float)
+
+
+def esd(theta: Array, lam: Array, sigma2: float) -> int:
+    """Definition 3.1: min k in [d] with H(k) <= sigma^2."""
+    if not np.isfinite(sigma2) or sigma2 < 0:
+        raise ValueError("sigma2 must be finite and non-negative")
+    h = tradeoff(theta, lam)
+    feasible = np.flatnonzero(h <= sigma2 + 32 * np.finfo(float).eps)
+    return int(feasible[0] + 1) if feasible.size else int(h.size)
+
+
+def span_profile(theta: Array, lam: Array, taus: Iterable[float]) -> Array:
+    """Definition 3.6 evaluated on a noise-level grid."""
+    return np.asarray([esd(theta, lam, float(tau)) for tau in taus], dtype=int)
+
+
+def pc_risk_k(theta: Array, lam: Array, sigma2: float, k: int) -> float:
+    """Population sequence-model risk of PC retaining k leading coordinates."""
+    theta, lam = _vectors(theta, lam)
+    if not 1 <= k <= theta.size:
+        raise ValueError("k must lie in [1,d]")
+    order = spectral_order(lam)
+    return float(k * sigma2 + np.sum(theta[order[k:]] ** 2))
+
+
+def oracle_pc_risk(theta: Array, lam: Array, sigma2: float) -> float:
+    return min(pc_risk_k(theta, lam, sigma2, k) for k in range(1, len(theta) + 1))
+
+
+def oracle_pc_k(theta: Array, lam: Array, sigma2: float) -> int:
+    risks = [pc_risk_k(theta, lam, sigma2, k) for k in range(1, len(theta) + 1)]
+    return int(np.argmin(risks) + 1)
+
+
+def construct_esd_signal(d: int, k: int, sigma2: float, seed: int = 0) -> Array:
+    """Construct a signal whose ESD is exactly k for decreasing spectra."""
+    if not 1 <= k <= d:
+        raise ValueError("k must lie in [1,d]")
     rng = np.random.default_rng(seed)
     theta = np.zeros(d)
-    theta[:K] = 5.0 * np.sqrt(sigma2) * (1 + rng.standard_normal(K) * 0.1)   # top-K strong
-    tail = tail_energy if tail_energy is not None else K * sigma2
-    theta[K:] = np.sqrt(tail / max(d - K, 1)) * np.ones(d - K)               # tail sums to K*sigma^2
+    theta[:k] = np.sqrt((4.0 * k + 1.0) * sigma2) * rng.choice([-1.0, 1.0], k)
+    if k < d:
+        # Strictly below the k*sigma2 crossing avoids floating-point ambiguity.
+        theta[k:] = np.sqrt(0.75 * k * sigma2 / (d - k))
     return theta
+
+
+def rademacher_bayes_risk(amplitude: float, sigma2: float, quadrature: int = 100) -> float:
+    """Scalar Bayes MSE for theta in {-a,+a} observed in N(theta,sigma2).
+
+    This gives a valid minimax lower bound for any parameter class containing
+    the corresponding hypercube. Gauss-Hermite quadrature makes the finite-case
+    calculation deterministic.
+    """
+    if amplitude <= 0 or sigma2 <= 0:
+        raise ValueError("amplitude and sigma2 must be positive")
+    nodes, weights = np.polynomial.hermite.hermgauss(quadrature)
+    noise = np.sqrt(2.0 * sigma2) * nodes
+    z = amplitude + noise
+    posterior_mean = amplitude * np.tanh(amplitude * z / sigma2)
+    loss = (amplitude - posterior_mean) ** 2
+    return float(np.dot(weights, loss) / np.sqrt(np.pi))
+
+
+def ridge_risk(theta: Array, lam: Array, sigma2: float, nu: float) -> tuple[float, float, float]:
+    theta, lam = _vectors(theta, lam)
+    shrink = lam / (lam + nu)
+    bias = float(np.sum(((1.0 - shrink) * theta) ** 2))
+    variance = float(sigma2 * np.sum(shrink**2))
+    return bias + variance, bias, variance
+
+
+def ridge_variance_proxy(lam: Array, sigma2: float, k: int) -> float:
+    lam = np.asarray(lam, dtype=float).reshape(-1)[spectral_order(lam)]
+    if not 1 <= k <= lam.size:
+        raise ValueError("k must lie in [1,d]")
+    return float(sigma2 * (k + np.sum(lam[k:] ** 2) / lam[k - 1] ** 2))
+
+
+def ridge_saturating_dimension(lam: Array, sigma2: float, c_r: float) -> int:
+    lam = np.asarray(lam, dtype=float).reshape(-1)[spectral_order(lam)]
+    answer = 0
+    for k in range(1, lam.size + 1):
+        n_tilde = np.sum(lam[k:] ** 2) / (k * lam[k - 1] ** 2)
+        h_bar = lam[k - 1] ** 2 / (k * (1.0 + n_tilde))
+        if c_r * h_bar > sigma2:
+            answer = k
+    return answer
+
+
+@dataclass(frozen=True)
+class OPGFTrace:
+    checkpoints: Array
+    estimates: Array
+    learned_spectra: Array
+
+
+def opgf(
+    observations: Array,
+    initial_lam: Array,
+    *,
+    depth: int,
+    b0: float,
+    step_size: float,
+    steps: int,
+    checkpoints: Iterable[int],
+) -> OPGFTrace:
+    """Discrete gradient descent approximation of Equation (12).
+
+    The D identical b-layers remain identical under the symmetric initialization,
+    so a single b vector is sufficient. Updates are simultaneous (plain GD).
+    """
+    z, lam = _vectors(observations, initial_lam)
+    if depth < 0 or b0 <= 0 or step_size <= 0 or steps < 0:
+        raise ValueError("invalid OP-GF configuration")
+    wanted = np.asarray(sorted(set(int(s) for s in checkpoints)), dtype=int)
+    if wanted.size == 0 or wanted[0] < 0 or wanted[-1] > steps:
+        raise ValueError("checkpoints must lie in [0,steps]")
+
+    a = np.sqrt(np.maximum(lam, 0.0))
+    beta = np.zeros_like(a)
+    b = np.full_like(a, b0)
+    estimates: list[Array] = []
+    spectra: list[Array] = []
+    next_checkpoint = 0
+
+    def record() -> None:
+        scale = a if depth == 0 else a * b**depth
+        estimates.append((scale * beta).copy())
+        spectra.append((scale**2).copy())
+
+    if wanted[0] == 0:
+        record()
+        next_checkpoint = 1
+
+    for step in range(1, steps + 1):
+        b_power = np.ones_like(b) if depth == 0 else b**depth
+        estimate = a * b_power * beta
+        residual = estimate - z
+        grad_a = b_power * beta * residual
+        grad_beta = a * b_power * residual
+        if depth:
+            grad_b = depth * a * (b ** (depth - 1)) * beta * residual
+        a_new = a - step_size * grad_a
+        beta_new = beta - step_size * grad_beta
+        if depth:
+            b = b - step_size * grad_b
+        a, beta = a_new, beta_new
+        if not np.all(np.isfinite(a)) or not np.all(np.isfinite(beta)) or not np.all(np.isfinite(b)):
+            raise FloatingPointError("OP-GF diverged; reduce step_size")
+        if next_checkpoint < wanted.size and step == wanted[next_checkpoint]:
+            record()
+            next_checkpoint += 1
+
+    return OPGFTrace(wanted, np.asarray(estimates), np.asarray(spectra))
+
+
+def misaligned_sequence(
+    d: int,
+    *,
+    q: float,
+    sparsity: int,
+    signal_decay: float,
+    eigen_decay: float,
+    amplitude: float = 1.0,
+) -> tuple[Array, Array]:
+    """Section 6 data construction with ell(j)=floor(j^q), using 1-based j."""
+    lam = np.arange(1, d + 1, dtype=float) ** (-eigen_decay)
+    theta = np.zeros(d)
+    for j in range(1, sparsity + 1):
+        index = int(np.floor(j**q)) - 1
+        if index >= d:
+            raise ValueError("d must be at least floor(J^q)")
+        theta[index] = amplitude * j ** (-(signal_decay + 1.0) / 2.0)
+    return theta, lam

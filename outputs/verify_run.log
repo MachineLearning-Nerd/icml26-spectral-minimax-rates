@@ -1,49 +1,60 @@
+Cloning into 'repo'...
+Using CPython 3.12.11
+Creating virtual environment at: .venv
+Installed 15 packages in 127ms
+================================================================================
+ALIGNMENT-SENSITIVE MINIMAX RATES — CORRECTED V4 CLAIM SUITE
+================================================================================
+paper=2509.20294v4
+paper_sha256=b08fee1a408d90102be6af7f8193862aa198b9acbd1e5c40601da927c96e7cef
+python=3.12.11 numpy=2.5.1
+backend=CPU clean_room=true
+claim_ledger_items=15
+evidence_policy=proof claims are not reported as empirically proved
+STAGE_START sequence theory
+STAGE_END sequence theory passed=True
+EVIDENCE P3.2={"constructed_esds": [[1, 1], [2, 2], [4, 4], [8, 8], [16, 16]], "failures": [], "passed": true, "random_cases": 240, "status": "validated"}
+EVIDENCE P3.7={"generalized_inverse": true, "passed": true, "profile_dominance": true, "profile_monotone": true, "status": "validated", "tradeoff_dominance": true}
+EVIDENCE T3.3={"passed": true, "proof_scope": "The asymptotic/uniform theorem is proof-audited; numerical evidence is a valid contained hypercube lower bound and PC upper bound.", "rows": [{"K": 2, "hypercube_contained": true, "lower": 0.35967960736838533, "lower_over_Ksigma2": 0.44959950921048164, "upper": 0.8, "upper_over_Ksigma2": 1.0}, {"K": 4, "hypercube_contained": true, "lower": 0.7193592147367707, "lower_over_Ksigma2": 0.44959950921048164, "upper": 1.6, "upper_over_Ksigma2": 1.0}, {"K": 8, "hypercube_contained": true, "lower": 1.4387184294735413, "lower_over_Ksigma2": 0.44959950921048164, "upper": 3.2, "upper_over_Ksigma2": 1.0}, {"K": 16, "hypercube_contained": true, "lower": 2.8774368589470827, "lower_over_Ksigma2": 0.44959950921048164, "upper": 6.4, "upper_over_Ksigma2": 1.0}], "status": "finite_case_validation_not_proof"}
+STAGE_START quota sequence
+STAGE_END quota sequence passed=True
+EVIDENCE T4.3={"condition_4_1_checked": true, "passed": true, "quota": "floor(sqrt(n))", "rows": [{"K_n": 8, "lower": 0.09553989570722737, "lower_ratio": 0.44959950921048175, "n": 64, "target": 0.2125, "upper": 0.2125, "upper_ratio": 1.0}, {"K_n": 12, "lower": 0.06369326380481825, "lower_ratio": 0.4495995092104818, "n": 144, "target": 0.14166666666666666, "upper": 0.14166666666666666, "upper_ratio": 1.0}, {"K_n": 16, "lower": 0.04776994785361369, "lower_ratio": 0.44959950921048175, "n": 256, "target": 0.10625, "upper": 0.10625, "upper_ratio": 1.0}, {"K_n": 24, "lower": 0.03184663190240913, "lower_ratio": 0.4495995092104818, "n": 576, "target": 0.07083333333333333, "upper": 0.07083333333333333, "upper_ratio": 1.0}, {"K_n": 32, "lower": 0.023884973926806843, "lower_ratio": 0.44959950921048175, "n": 1024, "target": 0.053125, "upper": 0.053125, "upper_ratio": 1.0}, {"K_n": 48, "lower": 0.015923315951204563, "lower_ratio": 0.4495995092104818, "n": 2304, "target": 0.035416666666666666, "upper": 0.035416666666666666, "upper_ratio": 1.0}], "status": "finite_case_validation_not_proof"}
+STAGE_START span profile / OP-GF
+STAGE_END span profile / OP-GF passed=True
+EVIDENCE T5.2={"audited_clauses": {"b0_and_t2_scalings_stated": true, "conclusion_is_weak_endpoint_esd_reduction": true, "endpoint_rank_and_margin_conditions": true, "fixed_depth_D_at_least_1": true, "large_sample_noise_sigma0_squared_over_n": true, "strong_coordinate_gap_condition": true, "strong_weak_signal_separation": true}, "passed": true, "scope": "Conditional endpoint theorem for fixed D>=1; a computation cannot prove its uniform high-probability statement.", "status": "proof_audited_not_numerically_proven"}
+EVIDENCE F1={"actual_opgf_dynamics": true, "aligned_q1_stable": true, "all_misaligned_log_profiles_improve": true, "config": {"J": 15, "d": 5000, "gamma": 1.0, "n": 10000, "p": 2.5, "q": [1.0, 1.5, 2.0, 3.0], "step_size": 0.05, "times": [0, 20, 40, 60, 80]}, "disclosure": "The paper does not report random seed, signal amplitude C, optimizer step size, or stopping-time selection; this is a deterministic clean-room run with all choices recorded.", "esd_at_sigma2": {"1.0": [10, 10, 10, 10, 10], "1.5": [22, 20, 19, 19, 19], "2.0": [36, 33, 31, 27, 26], "3.0": [88, 60, 44, 33, 33]}, "figure": "figures/figure1_span_profiles.png", "final_fraction_not_above_initial": {"1.0": 0.99, "1.5": 0.58, "2.0": 0.65, "3.0": 0.95}, "log_profile_improvement": {"1.0": -0.0009531017980432477, "1.5": 0.012312448945816784, "2.0": 0.06006041217153951, "3.0": 0.43887086052765506}, "manual_eigenvalue_boost": false, "negative_control_q1_smaller_than_q3": true, "passed": true, "q3_improves_more_than_q1_5": true, "status": "clean_room_empirical_reproduction"}
+STAGE_START depth experiment
+STAGE_END depth experiment passed=True
+EVIDENCE F2={"all_depths_decay": true, "config": {"d": 512, "depths": [0, 1, 3], "n": 10000, "note": "The paper does not disclose Figure 2 optimizer step size or b0; these clean-room values are explicit here.", "repetitions": 20, "step_size": 0.05, "steps": 2400}, "deeper_final_esd_below_shallow": true, "figure": "figures/figure2_depth.png", "passed": true, "status": "clean_room_empirical_reproduction", "summary": {"0": {"error_mean": [0.006892356969092271, 0.006892356969092271, 0.006892356969092271, 0.006640945994722003, 0.0067178323382625195, 0.0060926058383015584, 0.0053335322766439, 0.005054077983823385, 0.005047005173033662], "error_se": [0.00023564005269874542, 0.00023564005269874542, 0.00023564005269874542, 0.00021026734506093383, 0.0002179346217069556, 0.00034676422395268236, 0.0002295214219840754, 0.00019125310619057782, 0.000191040573111922], "esd_mean": [36.0, 36.0, 36.0, 33.7, 32.85, 29.8, 26.6, 25.6, 25.55], "esd_se": [0.0, 0.0, 0.0, 0.16383560438182504, 0.14999999999999997, 0.7732365335666087, 0.6743417843388196, 0.5301439725008172, 0.5255323115911293]}, "1": {"error_mean": [0.006676747592218824, 0.006676747592218824, 0.006676747592218824, 0.006645844408727608, 0.006436525380183472, 0.006098951613642739, 0.005345428689200243, 0.005074105623849638, 0.005115178646866338], "error_se": [0.00016176677738648885, 0.00016176677738648885, 0.00016176677738648885, 0.00016144173275405938, 0.00015934732633263608, 0.00019353960722811597, 0.0002704302001788236, 0.0003210498619382406, 0.0003968847969802114], "esd_mean": [36.0, 36.0, 36.0, 35.3, 33.1, 32.1, 26.5, 24.45, 23.5], "esd_se": [0.0, 0.0, 0.0, 0.1468977445995038, 0.0688247201611685, 0.4161224516135149, 1.079717311931327, 0.8780211003339151, 0.9389243565742775]}, "3": {"error_mean": [0.006912932917160708, 0.006912932917160708, 0.006912932917160708, 0.006912932917160708, 0.006888854877551373, 0.006706566862379579, 0.006646652155229342, 0.005811315795268561, 0.00549284577123813], "error_se": [0.00018640401222399546, 0.00018640401222399546, 0.00018640401222399546, 0.00018640401222399546, 0.00018365083676928382, 0.00017445586800415123, 0.00018673141323992198, 0.00025009572929002603, 0.0002732617526842613], "esd_mean": [36.0, 36.0, 36.0, 36.0, 35.35, 33.35, 32.95, 29.65, 25.8], "esd_se": [0.0, 0.0, 0.0, 0.0, 0.13128915456069917, 0.16662280124501816, 0.049999999999999996, 0.8774214614725533, 1.0652402743537548]}}}
+STAGE_START fixed-design linear
+STAGE_END fixed-design linear passed=True
+EVIDENCE PB.2-TB.3-F3={"cases": {"1": {"analytic_risk": [0.3012368516524399, 0.30273552302591344, 0.3029805359784715, 0.3036866552370654, 0.30506428318111106, 0.30528577548571356, 0.30787263467704246, 0.3152780789248315, 0.32316995155207473, 0.3402084314327281, 0.3688588459394698, 0.42276709505514243, 0.49821471937626394], "esd": [55, 55, 55, 56, 56, 57, 57, 59, 62, 68, 70, 78, 84], "mc_risk": [0.29844556688356316, 0.31231424554413995, 0.30582062025428836, 0.3022225647879731, 0.3036743878209568, 0.29973180192474186, 0.3107241101181918, 0.3128811905939405, 0.31240613029826025, 0.3390540760004782, 0.38386799503132474, 0.41494897706670136, 0.49987664058867115]}, "2": {"analytic_risk": [0.8592712898823198, 0.8976367412449503, 0.9254079638876994, 0.9542250626179064, 0.9752770689121981, 0.9982569801658511, 0.9987121415668117, 0.9988365392888238, 0.9987158641612456, 0.9984633148443782, 0.9981542414082707, 0.9978371125458144, 0.9975500680509077], "esd": [150, 179, 196, 219, 231, 243, 251, 253, 257, 259, 263, 263, 262], "mc_risk": [0.8690924061430192, 0.9043820039247134, 0.9259141307652079, 0.9506718053450758, 0.969356574843159, 0.9751232751374049, 0.9949169974392571, 0.9880740267669804, 0.9967902203084194, 0.9805416070309032, 1.000755044869424, 0.9996683177159369, 1.0050578550751061]}}, "config": {"alphas": [0.0, 0.6666666666666666, 1.3333333333333333, 2.0, 2.6666666666666665, 3.333333333333333, 4.0, 4.666666666666666, 5.333333333333333, 6.0, 6.666666666666666, 7.333333333333333, 8.0], "n": 300, "p": 400}, "esd_risk_correlations": [0.9682932763310284, 0.9863656616531874], "figure": "figures/figure3_linear.png", "passed": true, "pcr_sandwich_all_points": true, "status": "actual_fixed_design_experiment_and_reduction_audit"}
+STAGE_START RKHS/KPCPE
+STAGE_END RKHS/KPCPE passed=True
+EVIDENCE PC.4-TC.7-C.8-F4={"alphas": [0.0, 2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0, 20.0, 22.0, 24.0, 26.0, 28.0, 30.0], "bounded_target_supnorm": 1.5306361950668101, "config": {"J": 800, "changed_eigenvalues": 80, "n": 400, "repetitions": 10}, "effective_noise": 0.008357117904121504, "esd": [1, 1, 1, 21, 40, 51, 57, 62, 65, 68, 70, 71, 73, 74, 74, 75], "esd_risk_correlation": 0.9987117354593721, "figure": "figures/figure4_rkhs.png", "lower": [0.0, 0.0, 0.0, 0.05, 0.0975, 0.125, 0.14, 0.1525, 0.16, 0.1675, 0.1725, 0.175, 0.18, 0.1825, 0.1825, 0.185], "passed": true, "risk_mean": [0.006950948416628214, 0.006950948416628214, 0.006950948416628214, 0.09817042473302041, 0.18632890379545783, 0.25098656637122624, 0.29046746210509383, 0.32230175370725334, 0.3421418691885231, 0.35486054262833966, 0.3654674283272029, 0.3694886308991433, 0.3846764729418478, 0.38923447220711543, 0.38923447220711543, 0.39445299313611365], "risk_se": [0.0009316078319236856, 0.0009316078319236856, 0.0009316078319236856, 0.01294668614790882, 0.016576286418193923, 0.023716465874954254, 0.027118442586447692, 0.028072454731137557, 0.028054289208712002, 0.028784058069996767, 0.029309780812043135, 0.029240241858889807, 0.03175293653285687, 0.031214667260589073, 0.031214667260589073, 0.031821678050057235], "risk_within_bounds_3se": true, "status": "actual_random_design_experiment_and_assumption_audit", "upper": [0.016714235808243008, 0.016714235808243008, 0.016714235808243008, 0.35099895197310316, 0.6685694323297203, 0.8524260262203934, 0.9527114410698515, 1.0362826201110664, 1.0864253275357956, 1.1365680349605245, 1.1699965065770106, 1.1867107423852536, 1.2201392140017395, 1.2368534498099826, 1.2368534498099826, 1.2535676856182256]}
+STAGE_START pathwise learned kernel
+STAGE_END pathwise learned kernel passed=True
+EVIDENCE D1-D2-F5={"aligned_esd": 8, "config": {"cpu_reproduction": {"depth": 4, "epochs": 400, "n": 256, "p": 64}, "disclosure": "Scale reduced for CPU; verifies the mechanism, not exact Figure 5 numerical values.", "paper": {"depth": 4, "epochs": 500, "n": 1000, "p": 900}}, "figure": "figures/figure5_pathwise.png", "misaligned_esd": 16, "passed": true, "pathwise_decrease": true, "pathwise_esd": [21, 17, 3, 1, 1, 1, 1], "pathwise_risk": [1.4807293117948004, 0.899555408873051, 0.1194254870025889, 0.004090822773617792, 0.0029611161400491873, 0.0029572330518436805, 0.002957246404843128], "same_eigenvalue_multiset": true, "status": "constructive_control_and_scale_reduced_empirical_reproduction"}
+STAGE_START ridge saturation
+STAGE_END ridge saturation passed=True
+EVIDENCE I.6={"assumption_i2_cr": 0.26748547667577116, "bias_lower_bound": true, "esd": 7, "minimum_grid_ridge_risk": 0.000151253334982595, "passed": true, "ridge_saturating_dimension": 27, "ridge_theorem_lower_bound": true, "status": "direct_bound_validation_under_assumption_I.2", "theorem_floor": 1.35e-05, "variance_lower_bound": true}
 
-==============================================================================
-CLAIM 2 (Proposition 3.2): (d†-1) sigma^2 <= R*_PC <= 2 d† sigma^2
-==============================================================================
-  K~2: d†=2, R*_PC=4.000, sandwich=[1.00, 4.00] -> True
-  K~4: d†=5, R*_PC=8.000, sandwich=[4.00, 10.00] -> True
-  K~6: d†=6, R*_PC=12.000, sandwich=[5.00, 12.00] -> True
-  K~8: d†=9, R*_PC=16.000, sandwich=[8.00, 18.00] -> True
-
-==============================================================================
-CLAIM 1 (Theorem 3.3): minimax excess risk ~ K*sigma^2 over ESD<=K classes
-==============================================================================
-  K=2: ESD=2, R*_PC=4.000, K*sigma^2=2.0 (within constant factor) -> True
-  K=4: ESD=5, R*_PC=8.000, K*sigma^2=4.0 (within constant factor) -> True
-  K=8: ESD=9, R*_PC=16.000, K*sigma^2=8.0 (within constant factor) -> True
-  risk grows ~linearly with K (True: 4.00 -> 16.00)
-
-==============================================================================
-CLAIM 3/5 (Theorem 4.3): minimax risk scales ~ K*sigma^2 / n with n samples
-==============================================================================
-  R*_PC vs n (sparse signal): n=[1, 4, 16] -> risk=[5.0, 1.25, 0.312]; ratio n=1/n=16 = 16.0 (expect ~16) -> PASS
-
-==============================================================================
-CLAIM 5 (Section 7/8): linear regression minimax rate Theta(sigma^2 K/n)
-==============================================================================
-  observed risk=[5.0, 1.25, 0.312] vs linear-regression rate K*sigma^2/n=[5.0, 1.25, 0.312]; max rel err 0.000 -> PASS
-
-==============================================================================
-CLAIM 4 (Theorem 5.2): overparameterized gradient flow REDUCES the ESD (better alignment)
-==============================================================================
-  ESD before alignment = 29; after OP-GF alignment (lambda boosted on signal) = 7 -> PASS
-
-==============================================================================
-CLAIM 6: span profile (tail-energy ratio) decreases under OP-GF alignment
-==============================================================================
-  span profile before=0.8621, after OP-GF=0.0000 (decreases) -> PASS
-
-==============================================================================
-VERDICT SUMMARY
-==============================================================================
-  [PASS] c2_prop32_sandwich
-  [PASS] c1_thm33_minimax
-  [PASS] c3_thm43_scaling
-  [PASS] c5_linear_rate
-  [PASS] c4_thm52_opgf
-  [PASS] c6_span_profile
-
-  6/6 claims verified.
-  wrote outputs/verdict.json
+================================================================================
+CLAIM EVIDENCE SUMMARY
+================================================================================
+[PASS] P3.2: validated
+[PASS] P3.7: validated
+[PASS] T3.3: finite_case_validation_not_proof
+[PASS] T4.3: finite_case_validation_not_proof
+[PASS] T5.2: proof_audited_not_numerically_proven
+[PASS] F1: clean_room_empirical_reproduction
+[PASS] F2: clean_room_empirical_reproduction
+[PASS] PB.2-TB.3-F3: actual_fixed_design_experiment_and_reduction_audit
+[PASS] PC.4-TC.7-C.8-F4: actual_random_design_experiment_and_assumption_audit
+[PASS] D1-D2-F5: constructive_control_and_scale_reduced_empirical_reproduction
+[PASS] I.6: direct_bound_validation_under_assumption_I.2
+SUMMARY passed=11 total=11
+OUTPUT verdict=/Users/dineshjinjala/Documents/AllCode/ICMLPapers/OpenSearch/local-runs/96c9bb65-ace8-41ae-be09-b2a4b7c45601/repo/outputs/v4/verdict_v4.json
+OUTPUT matrix=/Users/dineshjinjala/Documents/AllCode/ICMLPapers/OpenSearch/local-runs/96c9bb65-ace8-41ae-be09-b2a4b7c45601/repo/outputs/v4/claim_matrix.csv
+OUTPUT figures=/Users/dineshjinjala/Documents/AllCode/ICMLPapers/OpenSearch/local-runs/96c9bb65-ace8-41ae-be09-b2a4b7c45601/repo/outputs/v4/figures
+PUBLICATION_GATE=PASS

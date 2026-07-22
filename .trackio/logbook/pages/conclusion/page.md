@@ -1,20 +1,7 @@
 # Conclusion
 
+All 15 version-pinned v4 claims are covered, and all 11 grouped evidence gates pass on CPU.
 
----
-<!-- trackio-cell
-{"type": "markdown", "id": "cell_aa501819e56c", "created_at": "2026-07-21T11:54:55+00:00", "title": "Executive summary"}
--->
-## Executive summary
+The result is a **clean-room reproduction**, not a bit-for-bit recovery of undisclosed author code. Figures 1 and 2 omit optimizer details and random seeds in the paper, so this package records its choices. Figure 5 is scale-reduced from `p=900` to `p=64` for CPU and supports the pathwise mechanism rather than claiming exact numerical replication.
 
-6/6 claim checks PASS for **Alignment-Sensitive Minimax Rates for Spectral Algorithms** (`4HrWo5x7YF`). Clean-room numpy verification on CPU (<1 min, <100 MB). Each claim verified at full scale with an independent mechanism and negative controls; no toy/proxy results.
-
-## Scope & cost
-
-| | This reproduction | Full replication |
-|---|---|---|
-| Scope | all claims, clean-room | same |
-| Hardware | CPU (numpy) | same |
-| Time | <1 min | same |
-| Cost | $0 | $0 |
-| Outcome | verified | — |
+Most importantly, proof claims are not inflated into empirical proofs: asymptotic minimax theorems are labeled as proof/assumption audits with valid finite lower and upper checks. The package is reproducible without a GPU using `uv` and the locked dependency file.

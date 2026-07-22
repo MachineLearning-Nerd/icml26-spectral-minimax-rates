@@ -1,51 +1,25 @@
-# Evidence
+# Recorded evidence
 
+## Sequence and minimax claims
 
----
-<!-- trackio-cell
-{"type": "markdown", "id": "cell_a430d9f1d867", "created_at": "2026-07-21T11:54:53+00:00", "title": "Verification output (last 40 lines)"}
--->
-## Verification output (last 40 lines)
+- P3.2 passed 240 randomized cases; constructed targets had exact ESD `1,2,4,8,16`.
+- The valid hypercube lower bound for T3.3 was `0.4496 K sigma²`; the PC upper bound was `1.0 K sigma²` for `K=2,4,8,16`.
+- P3.7 monotonicity, generalized inversion, trade-off dominance, and profile dominance all passed.
+- T4.3's `K_n=floor(sqrt(n))` quota condition passed; finite lower/target ratios were `0.4496` and upper/target ratios were `1.0`.
 
-```
-==============================================================================
-CLAIM 1 (Theorem 3.3): minimax excess risk ~ K*sigma^2 over ESD<=K classes
-==============================================================================
-  K=2: ESD=2, R*_PC=4.000, K*sigma^2=2.0 (within constant factor) -> True
-  K=4: ESD=5, R*_PC=8.000, K*sigma^2=4.0 (within constant factor) -> True
-  K=8: ESD=9, R*_PC=16.000, K*sigma^2=8.0 (within constant factor) -> True
-  risk grows ~linearly with K (True: 4.00 -> 16.00)
+## OP-GF and span profiles
 
-==============================================================================
-CLAIM 3/5 (Theorem 4.3): minimax risk scales ~ K*sigma^2 / n with n samples
-==============================================================================
-  R*_PC vs n (sparse signal): n=[1, 4, 16] -> risk=[5.0, 1.25, 0.312]; ratio n=1/n=16 = 16.0 (expect ~16) -> PASS
+- Equation (12) is integrated directly; there is no manual eigenvalue boost.
+- At `tau=sigma²`, Figure 1 ESD paths were `10→10` (`q=1`), `22→19` (`q=1.5`), `36→26` (`q=2`), and `88→33` (`q=3`).
+- Relative log-profile improvement increased with misalignment: `-0.001, 0.012, 0.060, 0.439`.
+- Figure 2 used 20 replications. All depths reduced ESD and error; `D=1` ended at ESD `23.5`, below shallow `D=0` at `25.55`.
 
-==============================================================================
-CLAIM 5 (Section 7/8): linear regression minimax rate Theta(sigma^2 K/n)
-==============================================================================
-  observed risk=[5.0, 1.25, 0.312] vs linear-regression rate K*sigma^2/n=[5.0, 1.25, 0.312]; max rel err 0.000 -> PASS
+## Linear, RKHS, learned-kernel, and ridge claims
 
-==============================================================================
-CLAIM 4 (Theorem 5.2): overparameterized gradient flow REDUCES the ESD (better alignment)
-==============================================================================
-  ESD before alignment = 29; after OP-GF alignment (lambda boosted on signal) = 7 -> PASS
+- Fixed-design ESD/oracle-risk correlations were `0.9683` and `0.9864`; every PCR sandwich point passed.
+- RKHS ESD/risk correlation was `0.9987`; all KPCPE risks lay within the claimed bounds using the recorded three-standard-error criterion.
+- Permuting an unchanged eigenvalue multiset changed ESD from `8` (aligned) to `16` (misaligned).
+- The scale-reduced four-layer path changed ESD `21→1` and risk `1.4807→0.0030`.
+- Ridge ESD was `7` while ridge saturating dimension was `27`; variance, bias, and theorem lower bounds all passed.
 
-==============================================================================
-CLAIM 6: span profile (tail-energy ratio) decreases under OP-GF alignment
-==============================================================================
-  span profile before=0.8621, after OP-GF=0.0000 (decreases) -> PASS
-
-==============================================================================
-VERDICT SUMMARY
-==============================================================================
-  [PASS] c2_prop32_sandwich
-  [PASS] c1_thm33_minimax
-  [PASS] c3_thm43_scaling
-  [PASS] c5_linear_rate
-  [PASS] c4_thm52_opgf
-  [PASS] c6_span_profile
-
-  6/6 claims verified.
-  wrote outputs/verdict.json
-```
+Full machine-readable values are committed in `outputs/verdict.json` and `outputs/v4/`. The complete run log is `outputs/verify_run.log`.
