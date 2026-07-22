@@ -201,6 +201,89 @@ def opgf(
     return OPGFTrace(wanted, np.asarray(estimates), np.asarray(spectra))
 
 
+def opgf_batched(
+    observations: Array,
+    initial_lam: Array,
+    *,
+    depth: int,
+    b0: float,
+    step_size: float,
+    steps: int,
+    checkpoints: Iterable[int],
+) -> OPGFTrace:
+    """Vectorized OP-GF for independent observations sharing one spectrum.
+
+    This is algebraically identical to :func:`opgf`; the leading axis indexes
+    Monte Carlo replications. Vectorization makes the paper-scale ``d=5000``,
+    20-replication depth audit practical on CPU without changing the dynamics.
+    """
+    z = np.asarray(observations, dtype=float)
+    lam = np.asarray(initial_lam, dtype=float).reshape(-1)
+    if z.ndim != 2 or z.shape[1] != lam.size or z.shape[0] == 0:
+        raise ValueError("observations must have shape (replications, dimension)")
+    if not np.all(np.isfinite(z)) or not np.all(np.isfinite(lam)):
+        raise ValueError("observations and initial_lam must be finite")
+    if depth < 0 or b0 <= 0 or step_size <= 0 or steps < 0:
+        raise ValueError("invalid OP-GF configuration")
+    wanted = np.asarray(sorted(set(int(s) for s in checkpoints)), dtype=int)
+    if wanted.size == 0 or wanted[0] < 0 or wanted[-1] > steps:
+        raise ValueError("checkpoints must lie in [0,steps]")
+
+    a = np.broadcast_to(np.sqrt(np.maximum(lam, 0.0)), z.shape).copy()
+    beta = np.zeros_like(a)
+    b = np.full_like(a, b0) if depth else None
+    estimates: list[Array] = []
+    spectra: list[Array] = []
+    next_checkpoint = 0
+
+    def powers() -> tuple[float | Array, float | Array]:
+        if depth == 0:
+            return 1.0, 0.0
+        if depth == 1:
+            return b, 1.0
+        if depth == 3:
+            b_squared = b * b
+            return b_squared * b, b_squared
+        return b**depth, b ** (depth - 1)
+
+    def record() -> None:
+        factor, _ = powers()
+        scale = a * factor
+        estimates.append((scale * beta).copy())
+        spectra.append((scale**2).copy())
+
+    if wanted[0] == 0:
+        record()
+        next_checkpoint = 1
+
+    for step in range(1, steps + 1):
+        factor, previous_power = powers()
+        scale = a * factor
+        residual = scale * beta
+        residual -= z
+        common = beta * residual
+        if depth:
+            grad_b = depth * a * previous_power * common
+            grad_a = factor * common
+        else:
+            grad_a = common
+        grad_beta = scale * residual
+        a -= step_size * grad_a
+        beta -= step_size * grad_beta
+        if depth:
+            b -= step_size * grad_b
+        if step % 500 == 0 or step == steps:
+            if not np.all(np.isfinite(a)) or not np.all(np.isfinite(beta)) or (
+                depth and not np.all(np.isfinite(b))
+            ):
+                raise FloatingPointError("OP-GF diverged; reduce step_size")
+        if next_checkpoint < wanted.size and step == wanted[next_checkpoint]:
+            record()
+            next_checkpoint += 1
+
+    return OPGFTrace(wanted, np.asarray(estimates), np.asarray(spectra))
+
+
 def misaligned_sequence(
     d: int,
     *,

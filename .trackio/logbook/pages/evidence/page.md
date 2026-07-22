@@ -12,7 +12,9 @@
 - Equation (12) is integrated directly; there is no manual eigenvalue boost.
 - At `tau=sigma²`, Figure 1 ESD paths were `10→10` (`q=1`), `22→19` (`q=1.5`), `36→26` (`q=2`), and `88→33` (`q=3`).
 - Relative log-profile improvement increased with misalignment: `-0.001, 0.012, 0.060, 0.439`.
-- Figure 2 used 20 replications. All depths reduced ESD and error; `D=1` ended at ESD `23.5`, below shallow `D=0` at `25.55`.
+- Figure 2 used `d=5000`, `q=3`, and 20 paired replications. At seed 2509, final mean ESD was `36.25`, `34.90`, and `33.90` for `D=0,1,3`.
+- Paired 95% CIs were `[-2.083,-0.617]` for D1−D0, `[-1.526,-0.474]` for D3−D1, and `[-3.314,-1.386]` for D3−D0.
+- Independent seed 19 also verified the ordering: `32.85 > 31.60 > 30.30`, again with all paired intervals below zero.
 
 ## Linear, RKHS, learned-kernel, and ridge claims
 

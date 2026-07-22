@@ -2,11 +2,11 @@
   "paper": "4HrWo5x7YF",
   "arxiv": "2509.20294v4",
   "publication_gate_passed": true,
-  "recorded_run": "96c9bb65-ace8-41ae-be09-b2a4b7c45601",
-  "commit": "9b15cc9",
+  "recorded_run": "4a067f01-3c6a-4f55-a8c1-8388cb364dc3",
+  "commit": "1680125",
   "backend": "local-cpu",
   "claim_ledger_items": 15,
   "grouped_checks_passed": 11,
   "grouped_checks_total": 11,
-  "reason": "The corrected v4 suite completed with PUBLICATION_GATE=PASS."
+  "reason": "The corrected v4 suite and paper-scale paired Claim 6 confirmation completed with PUBLICATION_GATE=PASS."
 }

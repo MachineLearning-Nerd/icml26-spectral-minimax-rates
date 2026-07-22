@@ -86,6 +86,23 @@ def test_opgf_depth_update_includes_chain_rule_factor() -> None:
     assert np.allclose(trace.learned_spectra[-1], expected_spectrum)
 
 
+def test_batched_opgf_matches_independent_runs() -> None:
+    observations = np.asarray([[0.7, -0.2], [0.1, 0.5]])
+    lam = np.asarray([0.81, 0.36])
+    kwargs = {
+        "depth": 3,
+        "b0": 0.8,
+        "step_size": 0.01,
+        "steps": 12,
+        "checkpoints": [0, 5, 12],
+    }
+    batched = s.opgf_batched(observations, lam, **kwargs)
+    for rep, observation in enumerate(observations):
+        independent = s.opgf(observation, lam, **kwargs)
+        assert np.allclose(batched.estimates[:, rep], independent.estimates)
+        assert np.allclose(batched.learned_spectra[:, rep], independent.learned_spectra)
+
+
 def test_rademacher_bayes_lower_bound_is_constant_order() -> None:
     sigma2 = 0.7
     risk = s.rademacher_bayes_risk(np.sqrt(sigma2), sigma2)
