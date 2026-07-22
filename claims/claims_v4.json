@@ -1,0 +1,115 @@
+{
+  "paper": {
+    "arxiv_id": "2509.20294v4",
+    "published": "2026-05-11",
+    "pdf": "https://arxiv.org/pdf/2509.20294v4",
+    "sha256": "b08fee1a408d90102be6af7f8193862aa198b9acbd1e5c40601da927c96e7cef"
+  },
+  "claims": [
+    {
+      "id": "P3.2",
+      "anchor": "Proposition 3.2",
+      "statement": "Oracle PC risk lies between (d_dagger-1)sigma^2 and 2 d_dagger sigma^2.",
+      "category": "finite_identity",
+      "method": "randomized property validation against independently enumerated PC risks"
+    },
+    {
+      "id": "T3.3",
+      "anchor": "Theorem 3.3",
+      "statement": "The minimax risk over ESD-bounded sequence classes is of order K sigma^2.",
+      "category": "proof_claim",
+      "method": "proof audit plus finite hypercube Bayes lower bound and PC upper bound"
+    },
+    {
+      "id": "P3.7",
+      "anchor": "Proposition 3.7",
+      "statement": "Span profiles and trade-off functions are monotone and related by generalized inversion; trade-off dominance implies profile dominance.",
+      "category": "finite_identity",
+      "method": "property validation on deterministic and randomized spectra"
+    },
+    {
+      "id": "T4.3",
+      "anchor": "Theorem 4.3",
+      "statement": "Under Condition 4.1, quota-sequence minimax risk scales as sigma_0^2 K_n/n.",
+      "category": "proof_claim",
+      "method": "condition audit plus finite hypercube lower and PC upper curves"
+    },
+    {
+      "id": "T5.2",
+      "anchor": "Theorem 5.2",
+      "statement": "Under its stated assumptions and endpoint conditions, OP-GF can weakly reduce ESD.",
+      "category": "conditional_proof_claim",
+      "method": "assumption-aware proof audit plus actual Equation (12) dynamics and controls"
+    },
+    {
+      "id": "F1",
+      "anchor": "Figure 1",
+      "statement": "OP-GF span profiles improve with training in misaligned cases, with little room for q=1 and larger improvement for worse misalignment.",
+      "category": "empirical",
+      "method": "CPU reproduction of the stated d=5000 sequence construction"
+    },
+    {
+      "id": "F2",
+      "anchor": "Figure 2",
+      "statement": "ESD and oracle-PC error generally decrease; deeper factorizations start later and can finish lower.",
+      "category": "empirical",
+      "method": "CPU Monte Carlo reproduction with disclosed clean-room optimizer settings"
+    },
+    {
+      "id": "PB.2",
+      "anchor": "Proposition B.2",
+      "statement": "Oracle PCR prediction risk satisfies the ESD sandwich.",
+      "category": "finite_identity",
+      "method": "actual fixed-design SVD/PCR simulation and analytic risk comparison"
+    },
+    {
+      "id": "TB.3",
+      "anchor": "Theorem B.3",
+      "statement": "Fixed-design linear minimax prediction risk is of order sigma_0^2 K/n.",
+      "category": "proof_claim",
+      "method": "reduction audit and finite transformed-hypercube validation"
+    },
+    {
+      "id": "F3",
+      "anchor": "Figure 3",
+      "statement": "Linear-model ESD tracks oracle PCR risk across alignment-changing design transformations.",
+      "category": "empirical",
+      "method": "n=300, p=400 fixed-design CPU experiment"
+    },
+    {
+      "id": "PC.4",
+      "anchor": "Proposition C.4",
+      "statement": "Oracle KPCPE risk lies between the RKHS ESD-derived lower and upper bounds.",
+      "category": "finite_bound",
+      "method": "random-design cosine-basis Monte Carlo experiment"
+    },
+    {
+      "id": "TC.7-C.8",
+      "anchor": "Theorems C.7 and C.8",
+      "statement": "RKHS ESD-class minimax rates scale as sigma_0^2 K/n under bounded-target and kernel-regularity assumptions.",
+      "category": "proof_claim",
+      "method": "assumption audit plus KPCPE upper and finite packing lower validation"
+    },
+    {
+      "id": "F4",
+      "anchor": "Figure 4",
+      "statement": "KPCPE risk remains between ESD bounds and rises as controlled misalignment inflates ESD.",
+      "category": "empirical",
+      "method": "n=400, J=800, ten-replication CPU experiment"
+    },
+    {
+      "id": "D1-D2",
+      "anchor": "Appendix D and Figure 5",
+      "statement": "ESD distinguishes equal-eigenvalue-multiset alignments and can track learned eigenfunction alignment pathwise.",
+      "category": "empirical_and_constructive",
+      "method": "permutation control plus disclosed scale-reduced deep-linear CPU experiment"
+    },
+    {
+      "id": "I.6",
+      "anchor": "Theorem I.6",
+      "statement": "Ridge risk has a saturation lower bound governed by the ridge saturating dimension, which need not match ESD.",
+      "category": "finite_bound",
+      "method": "direct numerical evaluation of all bound terms under Assumption I.2"
+    }
+  ]
+}

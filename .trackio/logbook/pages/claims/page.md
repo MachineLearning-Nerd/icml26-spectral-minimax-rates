@@ -1,15 +1,21 @@
-# Claims
+# Version-pinned claim ledger
 
+| ID | Anchor | Evidence type | Result |
+| --- | --- | --- | --- |
+| P3.2 | Proposition 3.2, oracle-PC ESD sandwich | randomized finite identity | PASS |
+| T3.3 | Theorem 3.3, sequence minimax rate | proof audit + contained hypercube lower/PC upper | PASS |
+| P3.7 | Proposition 3.7, profile monotonicity/inversion/dominance | property tests | PASS |
+| T4.3 | Theorem 4.3, quota-sequence minimax rate | condition audit + finite lower/upper curves | PASS |
+| T5.2 | Theorem 5.2, conditional OP-GF endpoint reduction | assumption and proof-scope audit | PASS |
+| F1 | Figure 1, OP-GF span-profile evolution | stated-scale CPU experiment | PASS |
+| F2 | Figure 2, depth/ESD/error dynamics | 20-replication clean-room experiment | PASS |
+| PB.2 | Proposition B.2, fixed-design PCR sandwich | SVD/PCR experiment and identity check | PASS |
+| TB.3 | Theorem B.3, fixed-design minimax rate | reduction and finite hypercube audit | PASS |
+| F3 | Figure 3, fixed-design alignment | `n=300`, `p=400` experiment | PASS |
+| PC.4 | Proposition C.4, KPCPE bounds | random-design Monte Carlo bound check | PASS |
+| TC.7-C.8 | Theorems C.7/C.8, RKHS minimax rates | assumptions + finite packing/upper audit | PASS |
+| F4 | Figure 4, RKHS ESD/risk tracking | `n=400`, `J=800`, 10 replications | PASS |
+| D1-D2 | Appendix D/Figure 5, learned eigensystem alignment | equal-spectrum control + scale-reduced path | PASS |
+| I.6 | Theorem I.6, ridge saturation | direct finite bound evaluation | PASS |
 
----
-<!-- trackio-cell
-{"type": "markdown", "id": "cell_085822b1989c", "created_at": "2026-07-21T11:54:52+00:00", "title": "Claims to reproduce"}
--->
-## Claims to reproduce
-
-1. Theorem 3.3 establishes that over signal classes with Effective Span Dimension (ESD) at most K, the minimax excess risk is asymptotically equivalent to K·σ², holding without classical eigenvalue-decay or source-condition assumptions (Theorem 3.3).
-2. Theorem 3.2 shows the principal-component (PC) estimator's risk is sandwiched as (d†−1)σ² ≤ Risk ≤ 2d†σ², where d† is the Effective Span Dimension defined as the smallest number of leading eigenfunctions whose remaining tail signal energy no longer exceeds the noise level σ² (Theorem 3.2).
-3. Theorem 4.3 gives convergence rates for a quota sequence {K_n}: the minimax risk over populations satisfying d†(σ0²/n; θ*, λ) ≤ K_n scales as Θ(K_n σ0²/n) (Theorem 4.3).
-4. Theorem 5.2 proves that overparameterized gradient flow (OP-GF) can reduce the Effective Span Dimension over training time by assigning larger adapted eigenvalues to strong signal directions with initially small eigenvalues, moving the problem into a lower minimax-risk complexity class (Theorem 5.2).
-5. Section 7 and Section 8 extend the Effective Span Dimension framework to linear regression (via SVD, minimax rate Θ(σ0²K/n)) and RKHS regression (rate Θ(σ̄²K_n/n) with effective noise σ̄² = (σ0² + ||f*||²_∞)/n) (Section 7, Section 8).
-6. Numerical experiments show that span profiles decrease during OP-GF training—with larger improvements when initial signal-spectrum alignment is worse—and that deeper models attain lower Effective Span Dimension than shallow variants given sufficient training iterations (Numerical Validation).
+“PASS” for a theorem means its assumptions and proof scope were audited and its finite consequences were checked. It does **not** mean a numerical script proved an asymptotic minimax theorem.

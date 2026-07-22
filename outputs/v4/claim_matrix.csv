@@ -1,0 +1,12 @@
+claim,status,passed
+P3.2,validated,True
+P3.7,validated,True
+T3.3,finite_case_validation_not_proof,True
+T4.3,finite_case_validation_not_proof,True
+T5.2,proof_audited_not_numerically_proven,True
+F1,clean_room_empirical_reproduction,True
+F2,clean_room_empirical_reproduction,True
+PB.2-TB.3-F3,actual_fixed_design_experiment_and_reduction_audit,True
+PC.4-TC.7-C.8-F4,actual_random_design_experiment_and_assumption_audit,True
+D1-D2-F5,constructive_control_and_scale_reduced_empirical_reproduction,True
+I.6,direct_bound_validation_under_assumption_I.2,True
