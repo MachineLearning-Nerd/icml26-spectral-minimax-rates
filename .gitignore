@@ -2,3 +2,8 @@
 __pycache__/
 *.pyc
 .trackio/runs/
+outputs/
+vendor/
+wandb/
+.DS_Store
+upstream/
