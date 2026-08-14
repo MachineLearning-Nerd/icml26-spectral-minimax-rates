@@ -29,7 +29,7 @@ For fixed factorization depth `D >= 1`, Theorem 5.2 gives a conditional weak red
 - Manual eigenvalue modification: no.
 - Stated-scale sequence dimension: `d=5000`.
 
-![Figure 1 span-profile evidence](https://raw.githubusercontent.com/MachineLearning-Nerd/icml26-repro-4HrWo5x7YF-spectral-minimax/agent/fix-all-v4-claims/outputs/v4/figures/figure1_span_profiles.png)
+![Figure 1 span-profile evidence](https://raw.githubusercontent.com/MachineLearning-Nerd/icml26-spectral-minimax-rates/main/outputs/v4/figures/figure1_span_profiles.png)
 
 ## Scope boundary
 

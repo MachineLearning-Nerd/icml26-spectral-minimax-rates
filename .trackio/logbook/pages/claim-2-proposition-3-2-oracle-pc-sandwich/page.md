@@ -28,4 +28,4 @@ The same run also verified Proposition 3.7's span-profile monotonicity, generali
 
 ## Exact reproducibility
 
-Run `uv run python repro/src/verify_spectral.py`; inspect keys `P3.2` and `P3.7` in [`outputs/v4/verdict_v4.json`](https://github.com/MachineLearning-Nerd/icml26-repro-4HrWo5x7YF-spectral-minimax/blob/agent/fix-all-v4-claims/outputs/v4/verdict_v4.json).
+Run `uv run python repro/src/verify_spectral.py`; inspect keys `P3.2` and `P3.7` in [`outputs/v4/verdict_v4.json`](https://github.com/MachineLearning-Nerd/icml26-spectral-minimax-rates/blob/main/outputs/v4/verdict_v4.json).

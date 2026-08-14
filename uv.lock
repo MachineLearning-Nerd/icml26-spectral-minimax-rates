@@ -348,7 +348,7 @@ wheels = [
 ]
 
 [[package]]
-name = "spectral-minimax-reproduction"
+name = "icml26-spectral-minimax-rates"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

@@ -25,7 +25,7 @@ The verifier checks both directions without pretending to numerically evaluate a
 | 8 | 0.4496 | 1.0000 | yes |
 | 16 | 0.4496 | 1.0000 | yes |
 
-The lower construction is explicitly checked for class membership; this avoids using a visually plausible but invalid lower-bound family. Machine-readable rows are in [`outputs/v4/verdict_v4.json`](https://github.com/MachineLearning-Nerd/icml26-repro-4HrWo5x7YF-spectral-minimax/blob/agent/fix-all-v4-claims/outputs/v4/verdict_v4.json).
+The lower construction is explicitly checked for class membership; this avoids using a visually plausible but invalid lower-bound family. Machine-readable rows are in [`outputs/v4/verdict_v4.json`](https://github.com/MachineLearning-Nerd/icml26-spectral-minimax-rates/blob/main/outputs/v4/verdict_v4.json).
 
 ## Scope boundary
 

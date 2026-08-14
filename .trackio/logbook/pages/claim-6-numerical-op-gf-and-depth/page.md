@@ -32,7 +32,7 @@ Independent seed `19` confirmed the result: final ESD was `32.85 > 31.60 > 30.30
 
 An earlier independent report used different noisy samples for each depth and obtained a D1 reversal. Reusing each observation across `D=0,1,3` removes that between-sample confound; both predeclared paired runs verify the strict ordering.
 
-![Figure 2 depth evidence](https://raw.githubusercontent.com/MachineLearning-Nerd/icml26-repro-4HrWo5x7YF-spectral-minimax/agent/fix-all-v4-claims/outputs/v4/figures/figure2_depth.png)
+![Figure 2 depth evidence](https://raw.githubusercontent.com/MachineLearning-Nerd/icml26-spectral-minimax-rates/main/outputs/v4/figures/figure2_depth.png)
 
 ## Missing information and scoring treatment
 

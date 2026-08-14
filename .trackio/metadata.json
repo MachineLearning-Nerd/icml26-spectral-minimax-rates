@@ -1,6 +1,10 @@
 {
   "paper_arxiv": "2509.20294",
+  "paper_version": "v4",
+  "paper_source_sha256": "b08fee1a408d90102be6af7f8193862aa198b9acbd1e5c40601da927c96e7cef",
   "paper_orid": "4HrWo5x7YF",
+  "repository_target": "icml26-spectral-minimax-rates",
+  "owner": "MachineLearning-Nerd",
   "tags": [
     "icml2026-repro",
     "paper-4HrWo5x7YF"

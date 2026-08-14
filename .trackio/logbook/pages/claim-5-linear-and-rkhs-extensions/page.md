@@ -27,9 +27,9 @@ This scoring bucket covers the paper's main extensions: Proposition B.2 and Theo
 | Scale-reduced learned path | ESD `21→1`, risk `1.4807→0.0030` |
 | Ridge control | ESD `7`, ridge saturating dimension `27`; all bound terms passed |
 
-![Fixed-design evidence](https://raw.githubusercontent.com/MachineLearning-Nerd/icml26-repro-4HrWo5x7YF-spectral-minimax/agent/fix-all-v4-claims/outputs/v4/figures/figure3_linear.png)
+![Fixed-design evidence](https://raw.githubusercontent.com/MachineLearning-Nerd/icml26-spectral-minimax-rates/main/outputs/v4/figures/figure3_linear.png)
 
-![RKHS evidence](https://raw.githubusercontent.com/MachineLearning-Nerd/icml26-repro-4HrWo5x7YF-spectral-minimax/agent/fix-all-v4-claims/outputs/v4/figures/figure4_rkhs.png)
+![RKHS evidence](https://raw.githubusercontent.com/MachineLearning-Nerd/icml26-spectral-minimax-rates/main/outputs/v4/figures/figure4_rkhs.png)
 
 ## Scope boundary
 

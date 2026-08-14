@@ -1,7 +1,7 @@
 [project]
-name = "spectral-minimax-reproduction"
+name = "icml26-spectral-minimax-rates"
 version = "0.1.0"
-description = "CPU reproduction checks for arXiv:2509.20294"
+description = "ICML 2026 reproduction audit for Alignment-Sensitive Minimax Rates for Spectral Algorithms"
 requires-python = ">=3.11,<3.13"
 dependencies = [
   "matplotlib>=3.9,<4",

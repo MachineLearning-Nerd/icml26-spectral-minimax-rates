@@ -2,6 +2,9 @@
 
 Paper: arXiv `2509.20294v4` · OpenReview `4HrWo5x7YF` · CPU-only clean-room reproduction
 
+Assessment: VERIFIED_SCOPED · evidence gate PASSED · strict theorem/proof gate
+NOT_READY. Authors: Dongming Huang, Zhifan Li, Yicheng Li, and Qian Lin.
+
 ## Pages
 
 | Page |

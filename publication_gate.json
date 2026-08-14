@@ -1,12 +1,50 @@
 {
-  "paper": "4HrWo5x7YF",
+  "schema_version": 2,
+  "paper_identifier": "4HrWo5x7YF",
+  "paper_title": "Alignment-Sensitive Minimax Rates for Spectral Algorithms with Learned Kernels",
+  "authors": [
+    "Dongming Huang",
+    "Zhifan Li",
+    "Yicheng Li",
+    "Qian Lin"
+  ],
   "arxiv": "2509.20294v4",
-  "publication_gate_passed": true,
+  "audited_source_sha256": "b08fee1a408d90102be6af7f8193862aa198b9acbd1e5c40601da927c96e7cef",
   "recorded_run": "4a067f01-3c6a-4f55-a8c1-8388cb364dc3",
-  "commit": "1680125",
   "backend": "local-cpu",
+  "tests_passed": true,
+  "evidence_release_gate": "PASSED",
+  "overall_status": "VERIFIED_SCOPED",
+  "strict_paper_claim_gate": "NOT_READY",
   "claim_ledger_items": 15,
   "grouped_checks_passed": 11,
   "grouped_checks_total": 11,
-  "reason": "The corrected v4 suite and paper-scale paired Claim 6 confirmation completed with PUBLICATION_GATE=PASS."
+  "unit_tests_passed": 7,
+  "claims": {
+    "claim_1": "VERIFIED_SCOPED_PROOF_AUDIT",
+    "claim_2": "VERIFIED_SCOPED",
+    "claim_3": "VERIFIED_SCOPED_PROOF_AUDIT",
+    "claim_4": "VERIFIED_SCOPED_CONDITIONAL",
+    "claim_5": "VERIFIED_SCOPED",
+    "claim_6": "VERIFIED_SCOPED_EMPIRICAL"
+  },
+  "publication": {
+    "status": "AWAITING_JUDGE",
+    "forecast": "12/12 at declared scope; not an external judge score",
+    "score_increase_claimed": false
+  },
+  "repository": {
+    "owner": "MachineLearning-Nerd",
+    "original_name": "icml26-repro-4HrWo5x7YF-spectral-minimax",
+    "target_name": "icml26-spectral-minimax-rates",
+    "default_branch": "main"
+  },
+  "branch_policy": {
+    "expected_public_branch_count": 3,
+    "legacy_refs_absent": [
+      "master",
+      "agent/*"
+    ],
+    "cleanup_status": "PENDING"
+  }
 }

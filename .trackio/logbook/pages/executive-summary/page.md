@@ -4,6 +4,10 @@
 
 **All six scored claims now have complete evidence at their stated scope. Forecast: 12/12, not a judged score.**
 
+Collection status: VERIFIED_SCOPED. Theorem buckets are proof-audited or
+conditional; numerical evidence does not replace the paper's asymptotic
+proofs. Paper authors: Dongming Huang, Zhifan Li, Yicheng Li, and Qian Lin.
+
 This report maps the six judge-facing claim buckets to a version-pinned 15-item ledger for arXiv `2509.20294v4`. The corrected CPU run passed all 11 evidence gates. The former Claim 6 gap was replaced with a paper-scale `d=5000`, 20-replication paired audit and an independent-seed confirmation.
 
 | Scored claim | Fine-grained ledger coverage | Outcome |
@@ -29,6 +33,6 @@ uv run python repro/src/verify_spectral.py
 - Independent paired confirmation: `9c8714ac-61dc-4ecc-a4ad-c5da2be9f8df`
 - Environment: CPython 3.12.11, NumPy 2.5.1, local CPU
 - Result: 11/11 evidence gates, 7/7 unit tests, 1 minute 50 seconds on CPU
-- Source and raw evidence: [GitHub draft PR #1](https://github.com/MachineLearning-Nerd/icml26-repro-4HrWo5x7YF-spectral-minimax/pull/1)
+- Source and raw evidence: [canonical repository](https://github.com/MachineLearning-Nerd/icml26-spectral-minimax-rates)
 
 No GPU is required for this package. “Supported” for an asymptotic theorem means the proof assumptions and scope were audited and valid finite consequences were checked; a numerical program does not prove an asymptotic minimax theorem.
