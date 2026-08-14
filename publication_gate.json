@@ -45,6 +45,8 @@
       "master",
       "agent/*"
     ],
-    "cleanup_status": "PENDING"
+    "cleanup_status": "VERIFIED",
+    "verified_at": "2026-08-14",
+    "remote_legacy_refs_absent": true
   }
 }
